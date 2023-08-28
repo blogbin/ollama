@@ -289,7 +289,7 @@ func newLlama(model string, adapters []string, opts api.Options) (*llama, error)
 					continue
 				}
 				defer resp.Body.Close()
-				if resp.StatusCode == http.StatusOK {
+				if resp.StatusCode < http.StatusBadRequest {
 					return &llama{Options: opts, Running: Running{Port: port, Cmd: cmd}}, nil
 				}
 			}
